@@ -1,39 +1,39 @@
 import { Link } from "react-router-dom";
 
 function Navbar() {
-  const navStyle = {
-    padding: "15px",
-    backgroundColor: "#001f3f", // azul marinho
+  const navbarStyle = {
     display: "flex",
-    alignItems: "center",
     justifyContent: "space-between",
+    alignItems: "center",
+    padding: "10px 20px",
+    backgroundColor: "#001f3f", // azul marinho
+    color: "#FFFFFF",
+    fontFamily: "Arial, sans-serif",
   };
 
   const logoStyle = {
-    color: "#FFA500", // laranja suave
-    fontWeight: "bold",
     fontSize: "20px",
-    fontFamily: "Arial, sans-serif",
-    marginLeft: "20px",
+    fontWeight: "bold",
   };
 
-  const linksContainerStyle = {
-    display: "flex",
-    gap: "20px",
-    marginRight: "20px",
+  const plusStyle = {
+    color: "#FFD700", // amarelo dourado para o "+"
   };
 
   const linkStyle = {
-    color: "#FFFFFF", // branco
+    color: "#FFFFFF",
     textDecoration: "none",
+    marginLeft: "15px",
     fontWeight: "bold",
-    fontFamily: "Arial, sans-serif",
   };
 
   return (
-    <nav style={navStyle}>
-      <div style={logoStyle}>Planeja+</div>
-      <div style={linksContainerStyle}>
+    <nav style={navbarStyle}>
+      <div style={logoStyle}>
+        <span style={{ color: "#FFFFFF" }}>Planeja</span>
+        <span style={plusStyle}>+</span>
+      </div>
+      <div>
         <Link to="/" style={linkStyle}>Resumo</Link>
         <Link to="/analise" style={linkStyle}>Análise</Link>
         <Link to="/planejamento" style={linkStyle}>Planejamento</Link>
@@ -43,6 +43,8 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
 
 
 
