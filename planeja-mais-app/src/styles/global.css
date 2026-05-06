@@ -9,6 +9,9 @@
 body, button, input, select, textarea{
   font-family: "Inter", sans-serif;
 }
+body{
+  background: #E5F0FF;
+}
 h1, h2{
   font-family: "Poppins", sans-serif;
 }
