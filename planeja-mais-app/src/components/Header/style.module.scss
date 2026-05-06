@@ -1,15 +1,41 @@
-.header{
-  background: #0B2040;
-  h1{
-    color: #E5F0FF;
-    span{
-      color: #D5A419;
+.header {
+  background: #0b2040;
+
+  h1 {
+    color: #e5f0ff;
+    span {
+      color: #d5a419;
+    }
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    li {
+      a {
+        display: inline-block;
+        color: #e5f0ff;
+        padding: 1rem 0;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 1.25rem;
+        line-height: 1.35;
+        &:hover {
+          color: #d5a419;
+        }
+      }
     }
   }
 }
 
-.container{
+.container {
   max-width: 1240px;
-  padding: 0 2rem;
-  margin: 0 auto;
+  padding: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: space-between;
+  align-items: center;
 }
