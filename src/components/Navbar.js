@@ -8,11 +8,11 @@ function Navbar() {
     padding: "10px 20px",
     backgroundColor: "#001f3f", // azul marinho
     color: "#FFFFFF",
-    fontFamily: "Arial, sans-serif",
+    fontFamily: "Montserrat, Arial, sans-serif",
   };
 
   const logoStyle = {
-    fontSize: "20px",
+    fontSize: "22px",
     fontWeight: "bold",
   };
 
@@ -20,20 +20,28 @@ function Navbar() {
     color: "#FFD700", // amarelo dourado para o "+"
   };
 
+  const linksContainerStyle = {
+    display: "flex",
+    gap: "20px",
+  };
+
   const linkStyle = {
     color: "#FFFFFF",
     textDecoration: "none",
-    marginLeft: "15px",
-    fontWeight: "bold",
+    fontWeight: "500",
+    fontSize: "16px",
   };
 
   return (
     <nav style={navbarStyle}>
+      {/* Logo */}
       <div style={logoStyle}>
         <span style={{ color: "#FFFFFF" }}>Planeja</span>
         <span style={plusStyle}>+</span>
       </div>
-      <div>
+
+      {/* Links */}
+      <div style={linksContainerStyle}>
         <Link to="/" style={linkStyle}>Resumo</Link>
         <Link to="/analise" style={linkStyle}>Análise</Link>
         <Link to="/planejamento" style={linkStyle}>Planejamento</Link>
@@ -43,12 +51,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-
-
-
-
-
-
-
-

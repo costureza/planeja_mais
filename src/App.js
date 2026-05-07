@@ -7,7 +7,10 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <Router>
+      {/* Navbar sempre visível */}
       <Navbar />
+
+      {/* Rotas principais */}
       <Routes>
         <Route path="/" element={<Resumo />} />
         <Route path="/analise" element={<Analise />} />
@@ -18,5 +21,3 @@ function App() {
 }
 
 export default App;
-
-
