@@ -1,0 +1,27 @@
+/* App.css limpo */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding-top: 80px; /* espaço abaixo do Navbar */
+  text-align: center;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background-color: #FFFFFF;
+  color: #001f3f;
+}
+
+.button-link {
+  padding: 12px 24px;
+  background-color: #001f3f;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
