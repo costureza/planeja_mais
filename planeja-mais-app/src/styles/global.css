@@ -1,0 +1,25 @@
+*{
+  margin: 0;
+  padding: 0;
+  border: none;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+body, button, input, select, textarea{
+  font-family: "Inter", sans-serif;
+}
+body{
+  background: #E5F0FF;
+}
+h1, h2{
+  font-family: "Poppins", sans-serif;
+}
+
+img{
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
