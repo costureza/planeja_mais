@@ -5,23 +5,22 @@
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  padding-top: 80px;
-  /* espaço abaixo do Navbar */
+  padding-top: 80px; /* espaço abaixo do Navbar */
   text-align: center;
   font-family: 'Montserrat', Arial, sans-serif;
-  background-color: #e5f0ff;
-  color: #0b2040;
+  background-color: #FFFFFF; /* fundo branco */
+  color: #001f3f;            /* azul marinho para texto */
 }
 
 .button-link {
   padding: 12px 24px;
-  background-color: #0b2040;
-  color: #e5f0ff;
-
+  background-color: #001f3f; /* azul marinho */
+  color: #FFFFFF;            /* texto branco */
+  border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
   font-size: 16px;
-
+  text-decoration: none;
   margin-top: 20px;
 }
