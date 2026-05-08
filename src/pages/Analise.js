@@ -88,7 +88,7 @@ function Analise() {
         <h2>Insights Automáticos</h2>
         {insights.map((insight, i) => (
           <p key={i} style={{ color: insightColors[insight.tipo] || "#0b2040", fontWeight: "bold" }}>
-            [{insight.tipo.toUpperCase()}] {insight.mensagem}
+            {insight.mensagem}
           </p>
         ))}
       </section>
