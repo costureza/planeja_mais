@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import GastosPorCategoriaChart from "../charts/GastosPorCategoriaChart";
 
 function Analise() {
   const containerStyle = {
@@ -33,6 +34,7 @@ function Analise() {
     <main style={containerStyle}>
       <h1>Análise</h1>
       <p>Aqui você verá gráficos e estatísticas detalhadas.</p>
+      <GastosPorCategoriaChart />
       <Link to="/" style={buttonStyle}>Voltar para Resumo</Link>
     </main>
   );
