@@ -5,19 +5,17 @@ import { buscarProdutos } from "../services/consumoService";
 import { consumoMock } from "../mocks/consumoMock";
 
 function Analise() {
+  const [produtos, setProdutos] = useState([]);
 
- const [produtos, setProdutos] = useState([]);
+  useEffect(() => {
+    async function carregarProdutos() {
+      const dados = await buscarProdutos();
 
+      setProdutos(dados);
+    }
 
-   useEffect(() => {
-     async function carregarProdutos() {
-       const dados = await buscarProdutos();
-
-       setProdutos(dados);
-     }
-
-     carregarProdutos();
-   }, []);
+    carregarProdutos();
+  }, []);
 
   const containerStyle = {
     display: "flex",
@@ -30,15 +28,15 @@ function Analise() {
     paddingRight: "20px",
     textAlign: "center",
     fontFamily: "Montserrat, Arial, sans-serif",
-    backgroundColor: "#FFFFFF",
-    color: "#001f3f",
+    backgroundColor: "#e5f0ff",
+    color: "#0b2040",
   };
 
   const buttonStyle = {
     marginTop: "20px",
     padding: "12px 24px",
-    backgroundColor: "#001f3f",
-    color: "#FFFFFF",
+    backgroundColor: "#0b2040",
+    color: "#e5f0ff",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
@@ -47,9 +45,9 @@ function Analise() {
     textDecoration: "none",
   };
 
-const maiorGasto = consumoMock.reduce((maior, atual) => {
-  return atual.valor > maior.valor ? atual : maior;
-});
+  const maiorGasto = consumoMock.reduce((maior, atual) => {
+    return atual.valor > maior.valor ? atual : maior;
+  });
 
   return (
     <main style={containerStyle}>
@@ -57,30 +55,31 @@ const maiorGasto = consumoMock.reduce((maior, atual) => {
 
       <p>Aqui você verá gráficos e estatísticas detalhadas.</p>
 
+      <h2>Consumo Mensal</h2>
 
-          <h2>Consumo Mensal</h2>
+      {consumoMock.map((item, index) => (
+        <p key={index}>
+          {item.categoria}: R$ {item.valor}
+        </p>
+      ))}
 
-            {consumoMock.map((item, index) => (
-              <p key={index}>
-                {item.categoria}: R$ {item.valor}
-              </p>
-            ))}
+      <h2>Insight</h2>
 
-            <h2>Insight</h2>
+      <p>
+        Maior gasto: {maiorGasto.categoria} — R$ {maiorGasto.valor}
+      </p>
 
-            <p>
-              Maior gasto: {maiorGasto.categoria} — R$ {maiorGasto.valor}
-            </p>
+      <h2>Produtos da API</h2>
 
-            <h2>Produtos da API</h2>
+      {produtos.slice(0, 5).map((produto) => (
+        <div key={produto.id}>
+          <p>{produto.title}</p>
+        </div>
+      ))}
 
-            {produtos.slice(0, 5).map((produto) => (
-              <div key={produto.id}>
-                <p>{produto.title}</p>
-              </div>
-            ))}
-
-      <Link to="/" style={buttonStyle}>Voltar para Resumo</Link>
+      <Link to="/" style={buttonStyle}>
+        Voltar para Resumo
+      </Link>
     </main>
   );
 }

@@ -1,13 +1,24 @@
-body {
+*{
   margin: 0;
   padding: 0;
+  border: none;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+body, button, input, select, textarea{
   font-family: 'Montserrat', sans-serif;
+}
+body{
+  background: #E5F0FF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 
-
-
-
-
+img{
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

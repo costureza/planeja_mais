@@ -12,15 +12,15 @@ function Planejamento() {
     paddingRight: "20px",
     textAlign: "center",
     fontFamily: "Montserrat, Arial, sans-serif",
-    backgroundColor: "#FFFFFF",
-    color: "#001f3f",
+    backgroundColor: "#e5f0ff",
+    color: "#0b2040",
   };
 
   const buttonStyle = {
     marginTop: "20px",
     padding: "12px 24px",
-    backgroundColor: "#001f3f",
-    color: "#FFFFFF",
+    backgroundColor: "#0b2040",
+    color: "#e5f0ff",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",

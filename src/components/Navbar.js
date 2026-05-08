@@ -6,8 +6,8 @@ function Navbar() {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px 20px",
-    backgroundColor: "#001f3f", // azul marinho
-    color: "#FFFFFF",
+    backgroundColor: "#0b2040", 
+    color: "#e5f0ff",
     fontFamily: "Montserrat, Arial, sans-serif",
   };
 
@@ -17,7 +17,7 @@ function Navbar() {
   };
 
   const plusStyle = {
-    color: "#FFD700", // amarelo dourado para o "+"
+    color: "#d5a419",
   };
 
   const linksContainerStyle = {
@@ -26,7 +26,7 @@ function Navbar() {
   };
 
   const linkStyle = {
-    color: "#FFFFFF",
+    color: "#e5f0ff",
     textDecoration: "none",
     fontWeight: "500",
     fontSize: "16px",
@@ -36,7 +36,7 @@ function Navbar() {
     <nav style={navbarStyle}>
       {/* Logo */}
       <div style={logoStyle}>
-        <span style={{ color: "#FFFFFF" }}>Planeja</span>
+        <span style={{ color: "#e5f0ff" }}>Planeja</span>
         <span style={plusStyle}>+</span>
       </div>
 
