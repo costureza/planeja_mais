@@ -1,24 +1,42 @@
 
 import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-function GastosPorCategoriaChart() {
-    const [valoresGrafico, setValoresGrafico] = useState([1000, 6000, 1000, 2000, 1400]);
+const GastosPorCategoriaChart = () => {
+
+    const [valores, setValores] = useState([1000, 6000, 1000, 2000, 1400]);
+
+    const categorias = ['Supermercado', 'Moradia', 'Educação', 'Transporte', 'Saúde'];
 
 
-    const labels = ['Abril', 'Maio', 'Junho', 'Agosto', 'Setembro'];
-    const cores = ['#FFD700', '#001f3f', '#4F6C8C', '#ADC1D9', '#FFD700'];
+    const definirCores = (valoresArray) => {
+        return valoresArray.map(valor => {
+            if (valor <= 1000) return '#FFD700';
+            if (valor <= 1500) return '#ADC1D9';
+            if (valor <= 2000) return '#4F6C8C';
+            return '#001f3f';
+        });
+    };
 
     const data = {
-        labels: labels,
+        labels: categorias,
         datasets: [
             {
-                label: 'Gastos R$',
-                data: valoresGrafico,
-                backgroundColor: cores,
+                label: 'Gastos por Categoria (R$)',
+                data: valores,
+                backgroundColor: definirCores(valores),
+                borderWidth: 1,
                 borderRadius: 5,
             },
         ],
@@ -28,52 +46,35 @@ function GastosPorCategoriaChart() {
         responsive: true,
         plugins: {
             legend: { display: false },
-        },
-        scales: {
-            y: { beginAtZero: true },
+            title: { display: true, text: 'Gastos por Categoria', font: { size: 18 } },
         },
     };
 
-
-    const lidarComMudancaNoValor = (indice, novoValor) => {
-
-        const valorNumerico = parseFloat(novoValor) || 0;
-
-
-        const novosValores = [...valoresGrafico];
-
-        novosValores[indice] = valorNumerico;
-
-
-        setValoresGrafico(novosValores);
+    const handleInputChange = (index, novoValor) => {
+        const novosValores = [...valores];
+        novosValores[index] = Number(novoValor);
+        setValores(novosValores);
     };
-
 
     return (
-        <div style={{ width: '80%', margin: '0 auto' }}>
-            { }
-            <div style={{ marginBottom: '40px' }}>
-                <Bar options={options} data={data} />
-            </div>
+        <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
+            <Bar data={data} options={options} />
 
-            { }
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center' }}>
-                <h3>Simular Gastos</h3>
-                {labels.map((mes, index) => (
-                    <div key={mes} style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                        <label htmlFor={`input-${mes}`} style={{ fontWeight: 'bold', fontSize: '14px', marginBottom: '4px' }}>{mes}</label>
+            <div style={{ marginTop: '20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                {categorias.map((cat, index) => (
+                    <div key={index} style={{ textAlign: 'left' }}>
+                        <label style={{ fontSize: '12px', display: 'block' }}>{cat}:</label>
                         <input
-                            id={`input-${mes}`}
                             type="number"
-                            value={valoresGrafico[index]}
-                            onChange={(e) => lidarComMudancaNoValor(index, e.target.value)}
-                            style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+                            value={valores[index]}
+                            onChange={(e) => handleInputChange(index, e.target.value)}
+                            style={{ width: '100%', padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
                         />
                     </div>
                 ))}
             </div>
         </div>
     );
-}
+};
 
 export default GastosPorCategoriaChart;
