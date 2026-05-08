@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useFinanceiro } from "../context/context";
+import { useFinanceiro } from "../context/FinanceiroContext";
 import "../App.css"; // importa os estilos globais
 
 function Resumo() {

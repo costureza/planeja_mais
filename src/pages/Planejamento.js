@@ -1,59 +1,115 @@
-import { Link } from "react-router-dom";
-import { useFinanceiro } from "../context/context";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { usePlanejamento, CATEGORIAS_DISPONIVEIS } from "../context/PlanejamentoContext";
+import { useFinanceiro } from "../context/FinanceiroContext";
+import "../App.css";
 
 function Planejamento() {
-  // Planejamento consome padrões e insights para orientar o usuário.
-  const { padroes, saldo, insights } = useFinanceiro();
+  const {
+    categoriasSelecionadas,
+    metasPorCategoria,
+    metaMensal,
+    toggleCategoria,
+    definirMetaCategoria,
+    setMetaMensal,
+    concluirPlanejamento,
+    refazerPlanejamento,
+    planejamentoConcluido,
+    totalMetas,
+  } = usePlanejamento();
 
-  const containerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    minHeight: "100vh",
-    paddingTop: "80px",
-    paddingLeft: "20px",
-    paddingRight: "20px",
-    textAlign: "center",
-    fontFamily: "Montserrat, Arial, sans-serif",
-    backgroundColor: "#e5f0ff", // fundo claro
-    color: "#0b2040",           // azul escuro para contraste
-  };
+  const { padroes, saldo } = useFinanceiro();
+  const navigate = useNavigate();
+  const [step, setStep] = useState(1);
 
-  const buttonStyle = {
-    marginTop: "20px",
-    padding: "12px 24px",
-    backgroundColor: "#001f3f", // azul marinho
-    color: "#FFFFFF",           // texto branco
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontWeight: "bold",
-    fontSize: "16px",
-    textDecoration: "none",
-  };
+  function handleConcluir() {
+    concluirPlanejamento();
+    navigate("/analise");
+  }
 
-  // Calcula quanto sobra se cortar gastos sazonais pela metade
+  const categoriasFiltradas = CATEGORIAS_DISPONIVEIS.filter((c) =>
+    categoriasSelecionadas.includes(c.id)
+  );
+
+  // Simulação de economia (baseada em dados reais do FinanceiroContext)
   const economiaSimulada = padroes.gastoSazonalTotal * 0.5;
   const saldoSimulado = saldo + economiaSimulada;
 
+  if (!planejamentoConcluido && step === 1) {
+    return (
+      <div className="page-container">
+        <h1>Planejamento</h1>
+        <h2>Quais são seus gastos?</h2>
+        <p>Selecione as categorias que deseja monitorar:</p>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", margin: "20px 0" }}>
+          {CATEGORIAS_DISPONIVEIS.map((cat) => (
+            <label key={cat.id} style={{ display: "flex", gap: "10px", cursor: "pointer" }}>
+              <input
+                type="checkbox"
+                checked={categoriasSelecionadas.includes(cat.id)}
+                onChange={() => toggleCategoria(cat.id)}
+              />
+              {cat.icone} {cat.nome}
+            </label>
+          ))}
+        </div>
+
+        <button className="button-link" onClick={() => setStep(2)} disabled={categoriasSelecionadas.length === 0}>
+          Continuar
+        </button>
+      </div>
+    );
+  }
+
+  if (!planejamentoConcluido && step === 2) {
+    return (
+      <div className="page-container">
+        <h1>Planejamento</h1>
+        <h2>Defina seus limites</h2>
+        
+        {categoriasFiltradas.map((cat) => (
+          <div key={cat.id} style={{ margin: "10px 0", textAlign: "left", width: "100%", maxWidth: "300px" }}>
+            <label>{cat.icone} {cat.nome}</label>
+            <input
+              type="number"
+              value={metasPorCategoria[cat.nome] || ""}
+              onChange={(e) => definirMetaCategoria(cat.nome, Number(e.target.value))}
+              placeholder="R$ 0,00"
+              style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+            />
+          </div>
+        ))}
+
+        <div style={{ marginTop: "20px", borderTop: "1px solid #ccc", paddingTop: "10px" }}>
+          <p>Total das metas: <strong>R$ {totalMetas.toFixed(2)}</strong></p>
+          <label>Meta Mensal Global:</label>
+          <input
+            type="number"
+            value={metaMensal}
+            onChange={(e) => setMetaMensal(Number(e.target.value))}
+            style={{ padding: "8px", marginLeft: "10px" }}
+          />
+        </div>
+
+        <div style={{ display: "flex", gap: "10px" }}>
+          <button className="button-link" onClick={() => setStep(1)} style={{ backgroundColor: "#555" }}>Voltar</button>
+          <button className="button-link" onClick={handleConcluir}>Concluir</button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div style={containerStyle}>
-      <h1>Planejamento</h1>
-      <p>Aqui você terá dicas e planos para consumir melhor.</p>
+    <div className="page-container">
+      <h1>Seu Planejamento</h1>
+      <div className="card" style={{ padding: "20px", marginBottom: "20px" }}>
+        <h3>Simulação de Economia</h3>
+        <p>Se você reduzir 50% dos gastos sazonais, economizará: <strong>R$ {economiaSimulada.toFixed(2)}</strong></p>
+        <p>Seu saldo saltaria de R$ {saldo.toFixed(2)} para <strong>R$ {saldoSimulado.toFixed(2)}</strong>!</p>
+      </div>
 
-      <h2>Simulação: Corte 50% dos gastos sazonais</h2>
-      <p>Economia potencial: <strong>R$ {economiaSimulada.toFixed(2)}</strong></p>
-      <p>Saldo projetado: <strong>R$ {saldoSimulado.toFixed(2)}</strong></p>
-
-      <h2>Todos os Insights</h2>
-      {insights.map((insight, i) => (
-        <p key={i}>
-          [{insight.tipo.toUpperCase()}] {insight.mensagem}
-        </p>
-      ))}
-
-      <Link to="/" style={buttonStyle}>Voltar para Resumo</Link>
+      <button className="button-link" onClick={refazerPlanejamento}>Refazer Planejamento</button>
     </div>
   );
 }

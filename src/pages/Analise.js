@@ -1,59 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-
-import { buscarProdutos } from "../services/consumoService";
-import { transacoesMock } from "../mocks/consumoMock";
-import { useFinanceiro } from "../context/context";
-
+import { useFinanceiro } from "../context/FinanceiroContext";
+import { usePlanejamento } from "../context/PlanejamentoContext";
+import "../App.css";
 
 function Analise() {
-  const { transacoes, insights, saldo, padroes } = useFinanceiro(); 
-  const [produtos, setProdutos] = useState([]);
+  const { 
+    saldo, 
+    insights, 
+    padroes, 
+    gastosPorCategoria, 
+    agrupamentoPorMes, 
+    comparativoMetas 
+  } = useFinanceiro();
 
-  const maiorGasto = transacoesMock.reduce((max, atual) =>
-    atual.valor > max.valor ? atual : max,
-    { categoria: "", valor: 0 }
-  );
+  const { planejamentoConcluido } = usePlanejamento();
 
+  const maiorGastoEntry = Object.entries(gastosPorCategoria)
+    .sort(([, a], [, b]) => b - a)[0];
 
-
-  useEffect(() => {
-    async function carregarProdutos() {
-      const dados = await buscarProdutos();
-
-      setProdutos(dados);
-    }
-
-    carregarProdutos();
-  }, []);
-
-  const containerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    minHeight: "100vh",
-    paddingTop: "80px",
-    paddingLeft: "20px",
-    paddingRight: "20px",
-    textAlign: "center",
-    fontFamily: "Montserrat, Arial, sans-serif",
-    backgroundColor: "#FFFFFF",
-    color: "#001f3f",
-  };
-
-  const buttonStyle = {
-    marginTop: "20px",
-    padding: "12px 24px",
-    backgroundColor: "#001f3f",
-    color: "#FFFFFF",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontWeight: "bold",
-    fontSize: "16px",
-    textDecoration: "none",
-  };
+  const maiorGasto = maiorGastoEntry 
+    ? { categoria: maiorGastoEntry[0], valor: maiorGastoEntry[1] }
+    : { categoria: "Nenhuma", valor: 0 };
 
   const insightColors = {
     alerta: "#e74c3c",
@@ -63,37 +31,69 @@ function Analise() {
   };
 
   return (
-    <main style={containerStyle}>
-      <h1>Análise</h1>
+    <main className="page-container">
+      <h1>Análise Detalhada</h1>
 
-      <p>Aqui você verá gráficos e estatísticas detalhadas.</p>
-
-      <h2>Consumo Mensal</h2>
-
-      {transacoesMock.map((item, index) => (
-        <p key={index}>
-          {item.categoria}: R$ {item.valor}
-        </p>
-      ))}
-
-      <h2>Insight</h2>
-
-      <p>
-        Maior gasto: {maiorGasto.categoria} — R$ {maiorGasto.valor}
-      </p>
-
-      <h2>Produtos da API</h2>
-
-      {produtos.slice(0, 5).map((produto) => (
-        <div key={produto.id}>
-          <p>{produto.title}</p>
+      <section style={{ width: "100%", maxWidth: "600px", margin: "20px 0" }}>
+        <h2>Saldo Atual: R$ {saldo.toFixed(2)}</h2>
+        
+        <div style={{ display: "flex", justifyContent: "space-around", margin: "20px 0" }}>
+          <div className="card">
+            <h3>Fixos</h3>
+            <p>R$ {padroes.gastoFixoTotal.toFixed(2)}</p>
+          </div>
+          <div className="card">
+            <h3>Sazonais</h3>
+            <p>R$ {padroes.gastoSazonalTotal.toFixed(2)}</p>
+          </div>
         </div>
-      ))}
+      </section>
 
-      {/* Botão voltar */}
-      <Link to="/" style={buttonStyle}>
-        Voltar para Resumo
-      </Link>
+      <section style={{ width: "100%", maxWidth: "600px" }}>
+        <h2>Visão Mensal</h2>
+        <div style={{ backgroundColor: "#f0f7ff", padding: "15px", borderRadius: "8px" }}>
+          {Object.entries(agrupamentoPorMes).map(([mes, valores]) => (
+            <div key={mes} style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #ddd", padding: "5px 0" }}>
+              <strong>{mes}</strong>
+              <span>Rec: R$ {valores.receita.toFixed(2)} | Desp: R$ {valores.despesa.toFixed(2)}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {planejamentoConcluido && (
+        <section style={{ width: "100%", maxWidth: "600px", marginTop: "30px" }}>
+          <h2>Acompanhamento de Metas</h2>
+          {comparativoMetas.map((item) => (
+            <div key={item.categoria} style={{ textAlign: "left", margin: "10px 0" }}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>{item.categoria}</span>
+                <span style={{ color: item.status === "estourou" ? "#e74c3c" : "#27ae60" }}>
+                  {item.status.toUpperCase()} (R$ {item.gastoReal.toFixed(2)} / R$ {item.meta.toFixed(2)})
+                </span>
+              </div>
+              <div style={{ width: "100%", height: "10px", backgroundColor: "#eee", borderRadius: "5px", overflow: "hidden" }}>
+                <div style={{ 
+                  width: `${Math.min((item.gastoReal / item.meta) * 100, 100)}%`, 
+                  height: "100%", 
+                  backgroundColor: item.status === "estourou" ? "#e74c3c" : "#27ae60" 
+                }} />
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
+      <section style={{ width: "100%", maxWidth: "600px", marginTop: "30px" }}>
+        <h2>Insights Automáticos</h2>
+        {insights.map((insight, i) => (
+          <p key={i} style={{ color: insightColors[insight.tipo] || "#0b2040", fontWeight: "bold" }}>
+            [{insight.tipo.toUpperCase()}] {insight.mensagem}
+          </p>
+        ))}
+      </section>
+
+      <Link to="/" className="button-link">Voltar para Resumo</Link>
     </main>
   );
 }
