@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { buscarProdutos } from "../services/consumoService";
@@ -28,15 +27,15 @@ function Analise() {
     paddingRight: "20px",
     textAlign: "center",
     fontFamily: "Montserrat, Arial, sans-serif",
-    backgroundColor: "#e5f0ff",
-    color: "#0b2040",
+    backgroundColor: "#FFFFFF",
+    color: "#001f3f",
   };
 
   const buttonStyle = {
     marginTop: "20px",
     padding: "12px 24px",
-    backgroundColor: "#0b2040",
-    color: "#e5f0ff",
+    backgroundColor: "#001f3f",
+    color: "#FFFFFF",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
@@ -45,9 +44,12 @@ function Analise() {
     textDecoration: "none",
   };
 
-  const maiorGasto = consumoMock.reduce((maior, atual) => {
-    return atual.valor > maior.valor ? atual : maior;
-  });
+  const insightColors = {
+    alerta: "#e74c3c",
+    aviso: "#f39c12",
+    positivo: "#27ae60",
+    info: "#2980b9",
+  };
 
   return (
     <main style={containerStyle}>
@@ -77,6 +79,7 @@ function Analise() {
         </div>
       ))}
 
+      {/* Botão voltar */}
       <Link to="/" style={buttonStyle}>
         Voltar para Resumo
       </Link>
