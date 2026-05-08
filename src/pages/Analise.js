@@ -1,10 +1,21 @@
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { buscarProdutos } from "../services/consumoService";
-import { consumoMock } from "../mocks/consumoMock";
+import { transacoesMock } from "../mocks/consumoMock";
+import { useFinanceiro } from "../context/context";
+
 
 function Analise() {
+  const { transacoes, insights, saldo, padroes } = useFinanceiro(); 
   const [produtos, setProdutos] = useState([]);
+
+  const maiorGasto = transacoesMock.reduce((max, atual) =>
+    atual.valor > max.valor ? atual : max,
+    { categoria: "", valor: 0 }
+  );
+
+
 
   useEffect(() => {
     async function carregarProdutos() {
@@ -59,7 +70,7 @@ function Analise() {
 
       <h2>Consumo Mensal</h2>
 
-      {consumoMock.map((item, index) => (
+      {transacoesMock.map((item, index) => (
         <p key={index}>
           {item.categoria}: R$ {item.valor}
         </p>
