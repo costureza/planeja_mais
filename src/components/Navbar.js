@@ -6,8 +6,8 @@ function Navbar() {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px 20px",
-    backgroundColor: "#0b2040", // azul marinho mais escuro
-    color: "#e5f0ff",           // tom claro para contraste
+    backgroundColor: "#0b2040", 
+    color: "#e5f0ff",
     fontFamily: "Montserrat, Arial, sans-serif",
   };
 
@@ -17,7 +17,7 @@ function Navbar() {
   };
 
   const plusStyle = {
-    color: "#FFD700", // amarelo dourado para o "+"
+    color: "#d5a419",
   };
 
   const linksContainerStyle = {
