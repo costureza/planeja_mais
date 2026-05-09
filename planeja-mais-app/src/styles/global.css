@@ -7,14 +7,14 @@
   box-sizing: border-box;
 }
 body, button, input, select, textarea{
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 body{
   background: #E5F0FF;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
-
+h1, h2{
+  font-family: "Poppins", sans-serif;
+}
 
 img{
   max-width: 100%;
@@ -22,3 +22,4 @@ img{
   object-fit: cover;
   display: block;
 }
+

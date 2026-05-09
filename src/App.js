@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./pages/Register";
+import { PlanejamentoProvider } from "./context/PlanejamentoContext";
+import { FinanceiroProvider } from "./context/FinanceiroContext";
 import Resumo from "./pages/Resumo";
 import Analise from "./pages/Analise";
 import Planejamento from "./pages/Planejamento";
@@ -22,23 +24,39 @@ function App() {
   }
 
   return (
-    <Router>
-      <ConditionalNavbar />
-      <Routes>
-        {/* 🔑 Rota inicial: se não estiver logado → login */}
-        <Route path="/" element={usuarioLogado ? <Navigate to="/resumo" /> : <Navigate to="/login" />} />
+    <PlanejamentoProvider>
+      <FinanceiroProvider>
+        <Router>
+          <ConditionalNavbar />
+          <Routes>
+            {/* 🔑 Rota inicial: se não estiver logado → login */}
+            <Route
+              path="/"
+              element={usuarioLogado ? <Navigate to="/resumo" /> : <Navigate to="/login" />}
+            />
 
-        {/* Rotas públicas */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+            {/* Rotas públicas */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        {/* Rotas protegidas */}
-        <Route path="/resumo" element={usuarioLogado ? <Resumo /> : <Navigate to="/login" />} />
-        <Route path="/analise" element={usuarioLogado ? <Analise /> : <Navigate to="/login" />} />
-        <Route path="/planejamento" element={usuarioLogado ? <Planejamento /> : <Navigate to="/login" />} />
-      </Routes>
-    </Router>
+            {/* Rotas protegidas */}
+            <Route
+              path="/resumo"
+              element={usuarioLogado ? <Resumo /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/analise"
+              element={usuarioLogado ? <Analise /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/planejamento"
+              element={usuarioLogado ? <Planejamento /> : <Navigate to="/login" />}
+            />
+          </Routes>
+        </Router>
+      </FinanceiroProvider>
+    </PlanejamentoProvider>
   );
 }
 
@@ -51,12 +69,4 @@ function ConditionalNavbar() {
 }
 
 export default App;
-
-
-
-
-
-
-
-
 

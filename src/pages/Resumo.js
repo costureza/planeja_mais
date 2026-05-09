@@ -9,11 +9,9 @@ function Resumo() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    // Busca os gastos salvos no localStorage
     const gastosSalvos = JSON.parse(localStorage.getItem("gastos")) || [];
     setGastos(gastosSalvos);
 
-    // Calcula o total
     const soma = gastosSalvos.reduce((acc, g) => acc + (parseFloat(g.valor) || 0), 0);
     setTotal(soma);
   }, []);
@@ -98,3 +96,4 @@ function Resumo() {
 }
 
 export default Resumo;
+

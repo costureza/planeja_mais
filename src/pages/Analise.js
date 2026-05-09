@@ -1,24 +1,25 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import GastosPorCategoriaChart from "../charts/GastosPorCategoriaChart";
-import styles from "./Analise.module.scss"; // 🔑 importa o SCSS
-
-// Exemplo de dados mockados
-const consumoMock = [
-  { categoria: "Alimentação", valor: 500 },
-  { categoria: "Transporte", valor: 300 },
-  { categoria: "Lazer", valor: 200 },
-];
-
-const produtos = [
-  { id: 1, title: "Produto A" },
-  { id: 2, title: "Produto B" },
-  { id: 3, title: "Produto C" },
-];
+import styles from "./Analise.module.scss";
+import { useFinanceiro } from "../context/FinanceiroContext";
+import { usePlanejamento } from "../context/PlanejamentoContext";
 
 function Analise() {
-  const maiorGasto = consumoMock.reduce((maior, atual) =>
-    atual.valor > maior.valor ? atual : maior
-  );
+  const { saldo, insights, padroes, gastosPorCategoria, agrupamentoPorMes, comparativoMetas } = useFinanceiro();
+  const { planejamentoConcluido } = usePlanejamento();
+
+  const maiorGastoEntry = Object.entries(gastosPorCategoria).sort(([, a], [, b]) => b - a)[0];
+  const maiorGasto = maiorGastoEntry
+    ? { categoria: maiorGastoEntry[0], valor: maiorGastoEntry[1] }
+    : { categoria: "Nenhuma", valor: 0 };
+
+  const insightColors = {
+    alerta: "#e74c3c",
+    aviso: "#f39c12",
+    positivo: "#27ae60",
+    info: "#2980b9",
+  };
 
   return (
     <main className={styles.container}>
@@ -30,16 +31,6 @@ function Analise() {
         <GastosPorCategoriaChart />
       </div>
 
-      {/* Consumo Mensal */}
-      <div className={styles.section}>
-        <h2>Consumo Mensal</h2>
-        {consumoMock.map((item, index) => (
-          <p key={index}>
-            {item.categoria}: R$ {item.valor}
-          </p>
-        ))}
-      </div>
-
       {/* Insight */}
       <div className={styles.section}>
         <h2>Insight</h2>
@@ -48,18 +39,44 @@ function Analise() {
         </p>
       </div>
 
-      {/* Produtos da API */}
+      {/* Visão Mensal */}
       <div className={styles.section}>
-        <h2>Produtos da API</h2>
-        {produtos.slice(0, 5).map((produto) => (
-          <div key={produto.id} className={styles.produto}>
-            <p>{produto.title}</p>
+        <h2>Visão Mensal</h2>
+        {Object.entries(agrupamentoPorMes).map(([mes, valores]) => (
+          <div key={mes} className={styles.mes}>
+            <strong>{mes}</strong>
+            <span>Rec: R$ {valores.receita.toFixed(2)} | Desp: R$ {valores.despesa.toFixed(2)}</span>
           </div>
         ))}
       </div>
 
+      {/* Metas */}
+      {planejamentoConcluido && (
+        <div className={styles.section}>
+          <h2>Acompanhamento de Metas</h2>
+          {comparativoMetas.map((item) => (
+            <div key={item.categoria} className={styles.meta}>
+              <span>{item.categoria}</span>
+              <span style={{ color: item.status === "estourou" ? "#e74c3c" : "#27ae60" }}>
+                {item.status.toUpperCase()} (R$ {item.gastoReal.toFixed(2)} / R$ {item.meta.toFixed(2)})
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Insights automáticos */}
+      <div className={styles.section}>
+        <h2>Insights Automáticos</h2>
+        {insights.map((insight, i) => (
+          <p key={i} style={{ color: insightColors[insight.tipo] || "#0b2040", fontWeight: "bold" }}>
+            {insight.mensagem}
+          </p>
+        ))}
+      </div>
+
       {/* Botão voltar */}
-      <Link to="/" className={styles.button}>
+      <Link to="/resumo" className={styles.button}>
         Voltar para Resumo
       </Link>
     </main>
@@ -67,4 +84,3 @@ function Analise() {
 }
 
 export default Analise;
-
