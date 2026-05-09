@@ -101,31 +101,27 @@ Execute o projeto
 
 ## Estrutura do Projeto
 
+## 📂 Estrutura de Pastas
+
+```text
 planeja-mais-app/
-│
 ├── public/
-│
 ├── src/
-│   │
 │   ├── charts/
 │   │   └── GastosPorCategoriaChart.js
-│   │
 │   ├── components/
 │   │   ├── FinanceHealthChart.js
 │   │   ├── Login.js
 │   │   ├── Login.module.scss
 │   │   ├── Navbar.js
 │   │   └── Navbar.module.scss
-│   │
 │   ├── context/
 │   │   ├── FinanceiroContext.js
 │   │   ├── financeiroLogic.js
 │   │   ├── financeiroLogic.test.js
 │   │   └── PlanejamentoContext.js
-│   │
 │   ├── mocks/
 │   │   └── consumoMock.js
-│   │
 │   ├── pages/
 │   │   ├── Analise.js
 │   │   ├── Analise.module.scss
@@ -137,21 +133,19 @@ planeja-mais-app/
 │   │   ├── Register.module.scss
 │   │   ├── Resumo.js
 │   │   └── Resumo.module.scss
-│   │
 │   ├── services/
 │   │   ├── api.js
 │   │   └── consumoService.js
-│   │
 │   ├── App.js
 │   ├── App.css
 │   ├── index.js
 │   ├── index.css
 │   ├── reportWebVitals.js
 │   └── setupTests.js
-│
 ├── package.json
 ├── yarn.lock
 └── README.md
+
 
 
 ## Organização da Equipe
