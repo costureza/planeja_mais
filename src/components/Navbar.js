@@ -18,7 +18,7 @@ function Navbar() {
     <nav className={styles.navbar}>
       {/* Logo */}
       <div className={styles.logo}>
-        <span style={{ color: "#e5f0ff" }}>Planeja</span>
+        <span style={{ color: "#e5f0ff" }}>planeja</span>
         <span style={{ color: "#FFD700" }}>+</span>
       </div>
 
