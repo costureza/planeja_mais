@@ -1,0 +1,129 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b2040, #1a3a6e);
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.box {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #0b2040;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  background: #f7f9fc;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #dce3f0;
+}
+
+.icon {
+  margin-right: 10px;
+  color: #0b2040;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.button {
+  padding: 12px;
+  background-color: #0b2040;
+  color: #FFD700;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: #1a3a6e;
+}
+
+/* 🔗 Links extras (Cadastrar / Esqueceu a senha) */
+.text {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.link {
+  color: #0b2040;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: #1a3a6e;
+}
+
+/* 🔑 Responsividade */
+@media (max-width: 768px) {
+  .box {
+    padding: 30px;
+    max-width: 90%;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .text {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .input {
+    font-size: 0.9rem;
+  }
+
+  .button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .text {
+    font-size: 0.8rem;
+  }
+}
+
+
+

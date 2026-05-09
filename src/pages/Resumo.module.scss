@@ -1,0 +1,272 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  background-color: #ffffff; /* fundo branco */
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #0b2040;
+}
+
+/* Caixa de boas-vindas */
+.box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e0e0e0; /* caixa cinza */
+  border-radius: 20px;
+  padding: 60px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  max-width: 1100px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.left {
+  flex: 1;
+}
+
+.highlight {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #001f3f;
+}
+
+.percent {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0b2040;
+}
+
+.arrow {
+  margin-left: 8px;
+  color: #ff6600; /* seta zig-zag laranja */
+}
+
+.month {
+  margin-left: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #334e68;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.welcome {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  font-weight: bold; /* Bem vinda em negrito */
+}
+
+.name {
+  color: #ff4500; /* laranja reforçado */
+  font-weight: 700;
+}
+
+.analiseButton {
+  padding: 14px 28px;
+  background-color: #001f3f; /* azul marinho */
+  color: #ffa500; /* laranja suave */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.analiseButton:hover {
+  background-color: #003366;
+}
+
+/* Seção dos cards */
+.cardsSection {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+.cardsTitle {
+  font-size: 1.6rem;
+  font-weight: bold; /* título em negrito */
+  margin-bottom: 20px;
+  color: #001f3f;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* dois cards por linha */
+  gap: 35px; /* espaço entre os cards */
+  width: 100%;
+}
+
+.card {
+  background: #d9d9d9; /* fundo cinza reforçado */
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.iconCircle {
+  width: 75px;   /* círculo ajustado */
+  height: 75px;
+  background-color: #001f3f; /* fundo azul */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  font-size: 2.4rem; /* ícone destacado */
+  color: #ffa500;    /* ícone laranja */
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cardContent h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #0b2040;
+}
+
+.saibaMais {
+  display: inline-block;
+  margin-top: 8px;
+  color: #001f3f; /* link azul */
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-decoration: underline;
+}
+
+.saibaMais:hover {
+  color: #003366;
+}
+
+/* Histórico */
+.historico {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.historico h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #001f3f;
+}
+
+/* 🔑 Responsividade */
+@media (max-width: 1024px) {
+  .box {
+    padding: 40px;
+  }
+
+  .highlight {
+    font-size: 1.8rem;
+  }
+
+  .cards {
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .box {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+  }
+
+  .right {
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr; /* 🔑 cards em 1 coluna */
+  }
+
+  .cardsTitle {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .highlight {
+    font-size: 1.5rem;
+  }
+
+  .percent {
+    font-size: 1.2rem;
+  }
+
+  .iconCircle {
+    width: 65px;
+    height: 65px;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .cardContent h3 {
+    font-size: 1.2rem;
+  }
+
+  .saibaMais {
+    font-size: 1rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,118 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 80px 20px 40px;
+  text-align: center;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background-color: #ffffff;
+  color: #001f3f;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #334e68;
+}
+
+.section {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.section h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.section p {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.produto {
+  background: #f2f2f2;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  background-color: #001f3f;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #003366;
+}
+
+/* 🔑 Responsividade */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 60px 15px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .section {
+    max-width: 100%;
+  }
+
+  .button {
+    width: 100%; /* 🔑 botão ocupa toda largura */
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .section h2 {
+    font-size: 1.2rem;
+  }
+
+  .section p {
+    font-size: 0.9rem;
+  }
+}

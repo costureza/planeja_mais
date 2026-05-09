@@ -1,0 +1,137 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0b2040;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.description {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.icon {
+  font-size: 1.5rem;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #0b2040;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* Inputs de nome e valor */
+.inputNome {
+  flex: 2;
+  padding: 8px;
+  border: 1px solid #dce3f0;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #0b2040;
+  outline: none;
+}
+
+.inputValor {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #dce3f0;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #0b2040;
+  outline: none;
+}
+
+.inputNome:focus,
+.inputValor:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 4px rgba(255, 215, 0, 0.6);
+}
+
+.value {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #0b2040;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.addButton,
+.removeButton,
+.concluir {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* 🔙 Volta para as cores originais */
+.addButton {
+  background-color: #0b2040;
+  color: #FFD700;
+}
+
+.addButton:hover {
+  background-color: #1a3a6e;
+}
+
+.removeButton {
+  background-color: #0b2040;
+  color: #FFD700;
+}
+
+.removeButton:hover {
+  background-color: #1a3a6e;
+}
+
+.concluir {
+  background-color: #0b2040;
+  color: #FFD700;
+}
+
+.concluir:hover {
+  background-color: #1a3a6e;
+}
+
+.voltar {
+  margin-top: 20px;
+  color: #0b2040;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+
