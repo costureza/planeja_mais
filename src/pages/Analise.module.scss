@@ -4,8 +4,7 @@
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  padding: 80px 20px 40px;
-  text-align: center;
+  padding: 60px 20px;
   font-family: 'Montserrat', Arial, sans-serif;
   background-color: #ffffff;
   color: #001f3f;
@@ -20,37 +19,109 @@
 .subtitle {
   font-size: 1.2rem;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   color: #334e68;
 }
 
 .section {
-  margin-top: 30px;
+  margin-top: 40px;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
+  text-align: center; /* 🔑 centraliza títulos e conteúdo */
 }
 
 .section h2 {
   font-size: 1.6rem;
   font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.cardsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards lado a lado */
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card h3, .card h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #001f3f;
+}
+
+.value {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.insight {
+  margin: 6px 0;
+  font-weight: 500;
+  color: #003366;
+}
+
+/* 🔑 Centraliza visão mensal */
+.mensalBox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards por linha */
+  gap: 20px;
+  justify-content: center;   /* centraliza horizontalmente */
+  align-items: start;
+  margin-top: 20px;
+}
+
+.mensalItem {
+  background: #f2f2f2;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  text-align: center; /* 🔑 centraliza conteúdo dentro do card */
+}
+
+.metaItem {
   margin-bottom: 15px;
 }
 
-.section p {
-  font-size: 1rem;
-  margin-bottom: 8px;
+.progressBar {
+  background: #ddd;
+  border-radius: 6px;
+  height: 8px;
+  margin-top: 6px;
 }
 
-.produto {
-  background: #f2f2f2;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+.progressFill {
+  height: 100%;
+  border-radius: 6px;
 }
 
 .button {
-  margin-top: 30px;
+  margin-top: 40px;
   padding: 12px 24px;
   background-color: #001f3f;
   color: #ffffff;
@@ -68,18 +139,14 @@
 
 /* 🔑 Responsividade */
 @media (max-width: 1024px) {
-  .title {
-    font-size: 2rem;
-  }
-
-  .section h2 {
-    font-size: 1.4rem;
+  .cardsRow, .mensalBox {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards por linha */
   }
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 60px 15px;
+  .cardsRow, .mensalBox {
+    grid-template-columns: 1fr; /* 1 card por linha */
   }
 
   .title {
@@ -90,12 +157,8 @@
     font-size: 1.1rem;
   }
 
-  .section {
-    max-width: 100%;
-  }
-
   .button {
-    width: 100%; /* 🔑 botão ocupa toda largura */
+    width: 100%;
   }
 }
 
@@ -112,7 +175,13 @@
     font-size: 1.2rem;
   }
 
-  .section p {
-    font-size: 0.9rem;
+  .card h3, .card h4 {
+    font-size: 1.1rem;
+  }
+
+  .value {
+    font-size: 1.2rem;
   }
 }
+
+

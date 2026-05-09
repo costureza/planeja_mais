@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle, FaBell } from "react-icons/fa";
 import { useState } from "react";
+import styles from "./Navbar.module.scss";
 
 function Navbar() {
   const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
@@ -14,35 +15,26 @@ function Navbar() {
   };
 
   return (
-    <nav style={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      padding: "25px 50px",
-      backgroundColor: "#0b2040",
-      color: "#e5f0ff",
-      fontFamily: "Montserrat, Arial, sans-serif"
-    }}>
+    <nav className={styles.navbar}>
       {/* Logo */}
-      <div style={{ fontSize: "26px", fontWeight: "bold" }}>
+      <div className={styles.logo}>
         <span style={{ color: "#e5f0ff" }}>Planeja</span>
         <span style={{ color: "#FFD700" }}>+</span>
       </div>
 
       {/* Links */}
-      <div style={{ display: "flex", gap: "40px", flex: 1, justifyContent: "center" }}>
-        <Link to="/resumo" style={{ color: "#e5f0ff", textDecoration: "none" }}>Meus Gastos</Link>
-        <Link to="/analise" style={{ color: "#e5f0ff", textDecoration: "none" }}>Agenda Financeira</Link>
-        <Link to="/planejamento" style={{ color: "#e5f0ff", textDecoration: "none" }}>Planejamento</Link>
+      <div className={styles.links}>
+        <Link to="/resumo" className={styles.link}>Meus Gastos</Link>
+        <Link to="/analise" className={styles.link}>Agenda Financeira</Link>
+        <Link to="/planejamento" className={styles.link}>Planejamento</Link>
       </div>
 
       {/* Ícones à direita */}
       <div style={{ display: "flex", gap: "15px", alignItems: "center", position: "relative" }}>
-        {/* Sino com badge vermelho */}
+        {/* Sino */}
         <div style={{ position: "relative" }}>
           <FaBell
             style={{ color: "#ffa500", fontSize: "24px", cursor: "pointer" }}
-            title="Notificações"
             onClick={() => setMostrarNotificacoes(!mostrarNotificacoes)}
           />
           {notificacoes.length > 0 && (
@@ -66,40 +58,14 @@ function Navbar() {
           )}
         </div>
 
-        {/* Dropdown de notificações */}
-        {mostrarNotificacoes && (
-          <div style={{
-            position: "absolute",
-            top: "40px",
-            right: "0",
-            background: "#fff",
-            color: "#000",
-            borderRadius: "8px",
-            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-            padding: "10px",
-            minWidth: "250px",
-            zIndex: 1000
-          }}>
-            {notificacoes.length > 0 ? (
-              notificacoes.map(n => (
-                <div key={n.id} style={{ padding: "8px", borderBottom: "1px solid #ddd" }}>
-                  {n.mensagem}
-                </div>
-              ))
-            ) : (
-              <div style={{ padding: "8px" }}>Sem notificações</div>
-            )}
-          </div>
-        )}
-
-        {/* Avatar ou ícone de usuário */}
+        {/* Avatar */}
         {usuarioLogado?.avatar ? (
           <img src={usuarioLogado.avatar} alt="Avatar" style={{ width: "32px", height: "32px", borderRadius: "50%", border: "2px solid #FFD700" }} />
         ) : (
           <FaUserCircle style={{ color: "#ffa500", fontSize: "24px" }} />
         )}
 
-        {/* Nome e botão sair */}
+        {/* Nome e sair */}
         {usuarioLogado && (
           <>
             <span style={{ color: "#FFD700", fontWeight: "bold" }}>{usuarioLogado.nome}</span>
@@ -124,6 +90,7 @@ function Navbar() {
 }
 
 export default Navbar;
+
 
 
 

@@ -52,10 +52,7 @@ function Resumo() {
               Bem-vinda, <span className={styles.name}>{usuarioLogado?.nome}</span>
             </strong>
           </p>
-          <div className={styles.totalBox}>
-            <span className={styles.label}>💰 Total de gastos:</span>
-            <span className={styles.value}>R$ {total.toFixed(2)}</span>
-          </div>
+          {/* ❌ Removido o bloco de total de gastos daqui */}
           <button
             className={styles.analiseButton}
             onClick={() => setMostrarAnalise(!mostrarAnalise)}
@@ -96,4 +93,5 @@ function Resumo() {
 }
 
 export default Resumo;
+
 

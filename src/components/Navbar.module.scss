@@ -1,0 +1,35 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 50px;
+  background-color: #0b2040;
+  color: #e5f0ff;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.links {
+  display: flex;
+  gap: 40px;
+  flex: 1;
+  justify-content: center;
+}
+
+.link {
+  color: #e5f0ff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  padding-bottom: 4px;
+}
+
+.link:hover,
+.link:active {
+  color: #ffa500; /* 🔑 contraste suave laranja */
+  border-bottom: 2px solid #ffa500;
+}
